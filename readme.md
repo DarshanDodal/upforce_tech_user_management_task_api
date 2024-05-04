@@ -10,7 +10,6 @@ This is the documentation for the backend API of our application. The API provid
 - Mongoose (for MongoDB)
 - Multer (for file upload)
 - Swagger (for API documentation)
-- Jest (for unit testing)
 
 ## Installation
 
@@ -114,14 +113,6 @@ The API documentation is generated using Swagger and can be accessed at `/api-do
    - **URL:** `/api/users/export/csv`
    - **Method:** GET
    - **Description:** Export all users to a CSV file.
-
-## Testing
-
-Unit tests are implemented using Jest. Run the following command to execute the tests:
-
-```bash
-npm test
-```
 
 ## Contributing
 

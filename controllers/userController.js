@@ -1,6 +1,6 @@
 const User = require("../models/User");
 const { stringify } = require("csv-stringify/sync");
-const { validationResult } = require("express-validator");
+// const { validationResult } = require("express-validator");
 const fs = require("fs");
 
 // Add a new user
