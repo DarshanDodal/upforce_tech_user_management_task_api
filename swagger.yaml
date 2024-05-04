@@ -1,0 +1,180 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "User Management API"
+  description: "API documentation for managing users"
+host: "localhost:3000"
+basePath: "/api"
+schemes:
+  - "http"
+  - "https"
+tags:
+  - name: "Users"
+    description: "Endpoints for managing users"
+paths:
+  /users:
+    post:
+      summary: "Create a new user with image upload"
+      tags:
+        - "Users"
+      consumes:
+        - "multipart/form-data"
+      parameters:
+        - in: formData
+          name: profilePhoto
+          type: file
+          required: true
+          description: "The user's profile photo (image file)"
+        - in: formData
+          name: firstName
+          type: string
+          required: true
+          description: "The user's first name"
+        - in: formData
+          name: lastName
+          type: string
+          required: true
+          description: "The user's last name"
+        - in: formData
+          name: email
+          type: string
+          required: true
+          description: "The user's email address"
+        - in: formData
+          name: mobile
+          type: string
+          required: true
+          description: "The user's mobile number"
+        - in: formData
+          name: gender
+          type: string
+          required: true
+          enum: ["Male", "Female"]
+          description: "The user's gender"
+        - in: formData
+          name: status
+          type: string
+          enum: ["active", "inactive"]
+          description: "The user's status"
+        - in: formData
+          name: location
+          type: string
+          description: "The user's location"
+      responses:
+        201:
+          description: "User created successfully"
+        400:
+          description: "Bad request - Invalid input data"
+        500:
+          description: "Something went wrong!"
+    get:
+      summary: "Get all users"
+      tags:
+        - "Users"
+      responses:
+        200:
+          description: "List of users retrieved successfully"
+        500:
+          description: "Something went wrong!"
+  /users/{userId}:
+    put:
+      summary: "Update user information"
+      tags:
+        - "Users"
+      consumes:
+        - "multipart/form-data"
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          type: number
+          description: "The ID of the user to update"
+        - in: formData
+          name: profilePhoto
+          type: file
+          required: false
+          description: "The user's updated profile photo (image file)"
+        - in: formData
+          name: firstName
+          type: string
+          description: "The user's updated first name"
+        - in: formData
+          name: lastName
+          type: string
+          description: "The user's updated last name"
+        - in: formData
+          name: email
+          type: string
+          description: "The user's updated email address"
+        - in: formData
+          name: mobile
+          type: string
+          description: "The user's updated mobile number"
+        - in: formData
+          name: gender
+          type: string
+          enum: ["Male", "Female"]
+          description: "The user's updated gender"
+        - in: formData
+          name: status
+          type: string
+          enum: ["active", "inactive"]
+          description: "The user's updated status"
+        - in: formData
+          name: location
+          type: string
+          description: "The user's updated location"
+      responses:
+        200:
+          description: "User information updated successfully"
+        400:
+          description: "Bad request - Invalid input data"
+        404:
+          description: "User not found"
+        500:
+          description: "Something went wrong!"
+    delete:
+      summary: "Delete user"
+      tags:
+        - "Users"
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          type: number
+          description: "The ID of the user to delete"
+      responses:
+        200:
+          description: "User deleted successfully"
+        404:
+          description: "User not found"
+        500:
+          description: "Something went wrong!"
+  /users/search:
+    get:
+      summary: "Search users by query string"
+      tags:
+        - "Users"
+      parameters:
+        - in: query
+          name: query
+          type: string
+          required: true
+          description: "The search query string"
+      responses:
+        200:
+          description: "List of users matching the search query retrieved successfully"
+        500:
+          description: "Something went wrong!"
+  /users/export/csv:
+    get:
+      summary: "Export all users to a CSV file"
+      tags:
+        - "Users"
+      produces:
+        - "text/csv"
+      responses:
+        200:
+          description: "CSV file containing all users exported successfully"
+        500:
+          description: "Something went wrong!"
